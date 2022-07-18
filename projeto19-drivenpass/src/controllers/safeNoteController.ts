@@ -28,4 +28,4 @@ export async function deleteNote(req:Request, res:Response) {
     await safeNoteService.deleteNote(noteId);
 
     res.sendStatus(200);
-}
+};
