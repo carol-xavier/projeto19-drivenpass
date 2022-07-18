@@ -1,13 +1,13 @@
 import prisma from "../config/database.js";
-import {CreateCredentialData} from "../services/credentialService.js";
+import { CreateCredentialData } from "../services/credentialService.js";
 
-async function insert(createCredentialData:CreateCredentialData) {
+async function insert(createCredentialData: CreateCredentialData) {
     await prisma.credential.create({
         data: createCredentialData
     });
 };
 
-async function findById(id: number) {
+async function findById(id: number, userId: number) {
     const credential = await prisma.credential.findUnique({
         where: { id }
     });
@@ -16,16 +16,18 @@ async function findById(id: number) {
     return credential;
 };
 
-async function findAll() {
-    return await prisma.credential.findMany();
+async function findAll(userId: number) {
+    return await prisma.credential.findMany({
+        where: { userId }
+    });
 };
 
-async function deleteCredential(id: number) {
-   await prisma.credential.delete({
+async function deleteCredential(id: number, userId: number) {
+    await prisma.credential.delete({
         where: { id }
     });
 };
- 
+
 export default {
     insert,
     findById,

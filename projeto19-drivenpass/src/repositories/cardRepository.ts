@@ -7,7 +7,7 @@ async function insert(createCardData:CreateCardData) {
     });
 };
 
-async function findById(id: number) {
+async function findById(id: number, userId:number) {
     const card = await prisma.card.findUnique({
         where: { id }
     });
@@ -16,11 +16,13 @@ async function findById(id: number) {
     return card;
 };
 
-async function findAll() {
-    return await prisma.card.findMany();
+async function findAll(userId:number) {
+    return await prisma.card.findMany({
+        where: {userId}
+    });
 };
 
-async function deleteCard(id: number) {
+async function deleteCard(id: number, userId:number) {
    await prisma.card.delete({
         where: { id }
     });

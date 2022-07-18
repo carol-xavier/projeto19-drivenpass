@@ -7,7 +7,7 @@ async function insert(createWiFiData:CreateWiFiData) {
     });
 };
 
-async function findById(id: number) {
+async function findById(id: number, userId:number) {
     const wifi = await prisma.wifiPassword.findUnique({
         where: { id }
     });
@@ -16,11 +16,13 @@ async function findById(id: number) {
     return wifi;
 };
 
-async function findAll() {
-    return await prisma.wifiPassword.findMany();
+async function findAll(userId:number) {
+    return await prisma.wifiPassword.findMany({
+        where: {userId}
+    });
 };
 
-async function deleteWiFi(id: number) {
+async function deleteWiFi(id: number, userId:number) {
    await prisma.wifiPassword.delete({
         where: { id }
     });

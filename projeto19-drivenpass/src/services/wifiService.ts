@@ -7,19 +7,19 @@ async function insert(createWiFiData:CreateWiFiData) {
     await wifiRepository.insert(createWiFiData);
 }
 
-async function findById(id: number) {
-    const wifi = await wifiRepository.findById(id);
+async function findById(id: number, userId:number) {
+    const wifi = await wifiRepository.findById(id, userId);
     if (!wifi) throw { type: "not_found" };
 
     return wifi;
 };
 
-async function findAll() {
-    return await wifiRepository.findAll();
+async function findAll(userId:number) {
+    return await wifiRepository.findAll(userId);
 }
 
-async function deleteWiFi(id: number) {
-    await wifiRepository.deleteWiFi(id)
+async function deleteWiFi(id: number, userId:number) {
+    await wifiRepository.deleteWiFi(id, userId)
 }
 
 export default {

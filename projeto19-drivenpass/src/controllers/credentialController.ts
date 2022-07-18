@@ -15,14 +15,19 @@ export async function createCredential(req: Request, res: Response) {
 };
 
 export async function getAllCredentials(req:Request, res:Response) {
-    const data = await credentialService.findAll();
+    const { id } = res.locals.session;
+    const userId = id;
+    const data = await credentialService.findAll(userId);
     const credentials = getCrdObject(data);
+    
     res.status(302).send(credentials);
 };
 
 export async function getCredential(req:Request, res:Response) {
     const credentialId = parseInt(req.params.id);
-    const credential = await credentialService.findById(credentialId);
+    const { id } = res.locals.session;
+    const userId = id;
+    const credential = await credentialService.findById(credentialId, userId);
     const {crdName, url, userName} = credential;
     const passcode = decryptString(credential.password);
 
@@ -31,7 +36,9 @@ export async function getCredential(req:Request, res:Response) {
 
 export async function deleteCredential(req:Request, res:Response) {
     const credentialId = parseInt(req.params.id);
-    await credentialService.deleteCredential(credentialId);
+    const { id } = res.locals.session;
+    const userId = id;
+    await credentialService.deleteCredential(credentialId,userId);
 
     res.sendStatus(200);
 };

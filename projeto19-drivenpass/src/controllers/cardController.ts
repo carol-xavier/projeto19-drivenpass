@@ -15,14 +15,18 @@ export async function createCard(req: Request, res: Response) {
 };
 
 export async function getAllCards(req: Request, res: Response) {
-    const data = await cardService.findAll();
+    const { id } = res.locals.session;
+    const userId = id;
+    const data = await cardService.findAll(userId);
     const cards = getCardObject(data);
     res.status(302).send(cards);
 };
 
 export async function getCard(req: Request, res: Response) {
     const cardId = parseInt(req.params.id);
-    const card = await cardService.findById(cardId);
+    const { id } = res.locals.session;
+    const userId = id;
+    const card = await cardService.findById(cardId, userId);
     const { cardNickname,
         cardNumber,
         printedName,
@@ -48,7 +52,9 @@ export async function getCard(req: Request, res: Response) {
 
 export async function deleteCard(req: Request, res: Response) {
     const cardId = parseInt(req.params.id);
-    await cardService.deleteCard(cardId);
+    const { id } = res.locals.session;
+    const userId = id;
+    await cardService.deleteCard(cardId, userId);
 
     res.sendStatus(200);
 };

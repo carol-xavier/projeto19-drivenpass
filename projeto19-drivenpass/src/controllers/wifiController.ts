@@ -15,14 +15,18 @@ export async function createWiFi(req: Request, res: Response) {
 };
 
 export async function getAllWiFi(req:Request, res:Response) {
-    const data = await wifiService.findAll();
+    const { id } = res.locals.session;
+    const userId = id;
+    const data = await wifiService.findAll(userId);
     const wifi = getWiFiObjects(data);
     res.status(302).send(wifi);
 };
 
 export async function getWiFi(req:Request, res:Response) {
     const wifiId = parseInt(req.params.id);
-    const wifi = await wifiService.findById(wifiId);
+    const { id } = res.locals.session;
+    const userId = id;
+    const wifi = await wifiService.findById(wifiId, userId);
     const {wifiNickname, wifiName, password} = wifi;
     const passcode = decryptString(password);
 
@@ -31,7 +35,9 @@ export async function getWiFi(req:Request, res:Response) {
 
 export async function deleteWiFi(req:Request, res:Response) {
     const wifiId = parseInt(req.params.id);
-    await wifiService.deleteWiFi(wifiId);
+    const { id } = res.locals.session;
+    const userId = id;
+    await wifiService.deleteWiFi(wifiId, userId);
 
     res.sendStatus(200);
 };

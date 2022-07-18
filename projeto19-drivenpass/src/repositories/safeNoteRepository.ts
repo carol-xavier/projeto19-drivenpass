@@ -7,7 +7,7 @@ async function insert(CreateNoteData: CreateNoteData) {
     });
 };
 
-async function findById(id: number) {
+async function findById(id: number, userId: number) {
     const note = await prisma.safeNote.findUnique({
         where: { id }
     });
@@ -16,12 +16,14 @@ async function findById(id: number) {
     return note;
 };
 
-async function findAll() {
-    return await prisma.safeNote.findMany();
+async function findAll(userId: number) {
+    return await prisma.safeNote.findMany({
+        where: { userId }
+    });
 };
 
-async function deleteNote(id: number) {
-   await prisma.safeNote.delete({
+async function deleteNote(id: number, userId: number) {
+    await prisma.safeNote.delete({
         where: { id }
     });
 };

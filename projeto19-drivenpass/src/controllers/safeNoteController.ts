@@ -11,21 +11,27 @@ export async function createNote(req: Request, res: Response) {
 };
 
 export async function getAllNotes(req:Request, res:Response) {
-    const notes = await safeNoteService.findAll();
+    const { id } = res.locals.session;
+    const userId = id;
+    const notes = await safeNoteService.findAll(userId);
 
     res.status(302).send(notes);
 };
 
 export async function getNote(req:Request, res:Response) {
+    const { id } = res.locals.session;
+    const userId = id;
     const noteId = parseInt(req.params.id);
-    const note = await safeNoteService.findById(noteId);
+    const note = await safeNoteService.findById(noteId, userId);
 
     res.status(302).send(note);
 };
 
 export async function deleteNote(req:Request, res:Response) {
+    const { id } = res.locals.session;
+    const userId = id;
     const noteId = parseInt(req.params.id);
-    await safeNoteService.deleteNote(noteId);
+    await safeNoteService.deleteNote(noteId, userId);
 
     res.sendStatus(200);
 };
