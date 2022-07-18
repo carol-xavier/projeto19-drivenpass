@@ -8,7 +8,10 @@ async function insert(createUserData: CreateUserData) {
 };
 
 async function findUnique(createUserData:CreateUserData) {
-   return await authRepository.findUnique(createUserData);
+   const user = await authRepository.findUnique(createUserData);
+   if (!user) throw { type: "not_found" };
+
+   return user;
 };
 
 export default {
