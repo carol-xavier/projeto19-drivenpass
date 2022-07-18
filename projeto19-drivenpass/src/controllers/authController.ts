@@ -15,12 +15,11 @@ export async function userSignUp(req: Request, res: Response) {
 
 export async function userSignIn(req: Request, res: Response) {
     const data: CreateUserData = req.body;
-    const { password } = await authService.findUnique(data);
-
-    const passwordValidation = bcrypt.compareSync(data.password, password);
+    const user = await authService.findUnique(data);
+    const passwordValidation = bcrypt.compareSync(data.password, user.password);
     if (!passwordValidation) return res.status(401).send("Somthing is wrong. Check your e-mail and password");
 
-    const token = createToken(data.email);
+    const token = createToken(data.email, user.id);
 
     return res.status(201).send({ token });
 };

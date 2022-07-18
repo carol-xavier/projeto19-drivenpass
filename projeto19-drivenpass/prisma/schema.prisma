@@ -35,7 +35,7 @@ model SafeNote {
   id     Int    @id @default(autoincrement())
   userId Int
   user   User   @relation(fields: [userId], references: [id])
-  tittle String @unique
+  title String @unique
   note   String
 
   @@map("safeNotes")

@@ -8,9 +8,9 @@ export function createUser(data) {
     return user;
 };
 
-export function createToken(email) {
+export function createToken(email, id) {
     const secretKey = process.env.JWT_SECRET;
-    const session = { email };
+    const session = { email, id };
     const setting = { expiresIn: 60 * 60 * 2 };
     const token = jwt.sign(session, secretKey, setting);
 
