@@ -12,6 +12,7 @@ async function findById(id: number, userId: number) {
         where: { id }
     });
     if (!credential) throw { type: "not_found" };
+    if (credential.userId !== userId) throw { type: "this information doesn't belong to you" };
 
     return credential;
 };
@@ -23,6 +24,10 @@ async function findAll(userId: number) {
 };
 
 async function deleteCredential(id: number, userId: number) {
+    const credential = await prisma.credential.findUnique({
+        where: { id },
+    });
+    if (credential.userId !== userId) throw { type: "this information doesn't belong to you" };
     await prisma.credential.delete({
         where: { id }
     });
