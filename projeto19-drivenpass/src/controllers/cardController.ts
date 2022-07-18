@@ -23,7 +23,7 @@ export async function getAllCards(req: Request, res: Response) {
 export async function getCard(req: Request, res: Response) {
     const cardId = parseInt(req.params.id);
     const card = await cardService.findById(cardId);
-    const { cardNickName,
+    const { cardNickname,
         cardNumber,
         printedName,
         expirationDate,
@@ -35,7 +35,7 @@ export async function getCard(req: Request, res: Response) {
     const code = decryptString(cvv);
 
     res.status(302).send({
-        cardNickName,
+        cardNickname,
         cardNumber,
         printedName,
         expirationDate,

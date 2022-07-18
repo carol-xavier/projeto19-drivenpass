@@ -35,17 +35,17 @@ model SafeNote {
   id     Int    @id @default(autoincrement())
   userId Int
   user   User   @relation(fields: [userId], references: [id])
-  title String @unique
+  title  String @unique
   note   String
 
   @@map("safeNotes")
 }
 
 model Card {
-  id             Int      @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   userId         Int
-  user           User     @relation(fields: [userId], references: [id])
-  cardNickName   String   @unique
+  user           User    @relation(fields: [userId], references: [id])
+  cardNickname   String  @unique
   cardNumber     Int
   printedName    String
   cvv            String
@@ -61,7 +61,7 @@ model wifiPassword {
   id           Int    @id @default(autoincrement())
   userId       Int
   user         User   @relation(fields: [userId], references: [id])
-  wifiNickname String
+  wifiNickname String @unique
   wifiName     String
   password     String
 

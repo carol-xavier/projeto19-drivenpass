@@ -2,7 +2,7 @@ import Joi from "joi";
 import { CreateCardData } from "../services/cardService.js"; 
 
 export const cardSchema = Joi.object<CreateCardData>({
-    cardNickName: Joi.string().required(),
+    cardNickname: Joi.string().required(),
     cardNumber: Joi.number().required(),
     printedName: Joi.string().required(),
     cvv: Joi.string().required(),

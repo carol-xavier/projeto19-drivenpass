@@ -2,7 +2,7 @@ import { encryptString } from "../utils/cryptrUtil.js";
 
 export function createCardObject(data) {
     const { 
-        cardNickName, 
+        cardNickname, 
         cardNumber, 
         printedName, 
         cvv, 
@@ -16,7 +16,7 @@ export function createCardObject(data) {
     const encryptedNumber = encryptString(cvv);
 
     return { 
-        cardNickName, 
+        cardNickname, 
         cardNumber, 
         printedName, 
         expirationDate, 
