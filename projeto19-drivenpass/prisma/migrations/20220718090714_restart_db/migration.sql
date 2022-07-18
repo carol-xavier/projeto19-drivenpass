@@ -23,7 +23,7 @@ CREATE TABLE "credentials" (
 CREATE TABLE "safeNotes" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "tittle" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "note" TEXT NOT NULL,
 
     CONSTRAINT "safeNotes_pkey" PRIMARY KEY ("id")
@@ -36,8 +36,8 @@ CREATE TABLE "cards" (
     "cardNickname" TEXT NOT NULL,
     "cardNumber" INTEGER NOT NULL,
     "printedName" TEXT NOT NULL,
-    "cvv" INTEGER NOT NULL,
-    "expirationDate" TIMESTAMP(3) NOT NULL,
+    "cvv" TEXT NOT NULL,
+    "expirationDate" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "virtual" BOOLEAN NOT NULL,
     "type" TEXT NOT NULL,
@@ -57,13 +57,19 @@ CREATE TABLE "wifiPasswords" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "credentials_crdName_key" ON "credentials"("crdName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "safeNotes_tittle_key" ON "safeNotes"("tittle");
+CREATE UNIQUE INDEX "safeNotes_title_key" ON "safeNotes"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "cards_cardNickname_key" ON "cards"("cardNickname");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "wifiPasswords_wifiNickname_key" ON "wifiPasswords"("wifiNickname");
 
 -- AddForeignKey
 ALTER TABLE "credentials" ADD CONSTRAINT "credentials_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
