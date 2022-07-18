@@ -1,10 +1,19 @@
-import Cryptr from "cryptr";
+import { encryptString, decryptString } from "../utils/cryptrUtil.js";
 
 export function createCrdObject(data) {
-    const secretKey = process.env.CRYPT_SECRET;
-    const cryptr = new Cryptr(secretKey);
-    const encryptedString = cryptr.encrypt(data.password);
+    const { crdName, url, userName, password } = data;
 
-    const { crdName, url, userName } = data
+    const encryptedString = encryptString(password);
+
     return { crdName, url, userName, password: encryptedString };
 };
+
+export function getCrdObject(data) {
+    const credentials = data.map((obj) => {
+        const { crdName, url, userName } = obj;
+        const passcode = decryptString(obj.password);
+        return { crdName, url, userName, password: passcode };
+    });
+
+    return credentials;
+}
