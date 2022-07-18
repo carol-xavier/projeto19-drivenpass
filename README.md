@@ -6,7 +6,7 @@
 
 <p align = "center">
    <img src="https://img.shields.io/badge/author-CarolXavier-4dae71?style=flat-square" />
-   <img src="https://img.shields.io/github/languages/count/CarolXavier/DrivenPass?color=4dae71&style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/carol-xavier/projeto19-drivenpass?color=4dae71&style=flat-square" />
 </p>
 
 
@@ -90,6 +90,8 @@ POST /credentials (autenticada)
         "password":"teste"
     }
 ```
+
+```yml
 GET /credentials/:id (autenticada)
     - Rota para listar uma credencial pelo id
     - headers: { "Authorization": "Bearer $token" }
@@ -103,6 +105,7 @@ GET /credentials (autenticada)
     - body: {}
 ``` 
 
+```yml
 DELETE /credentials/:id (autenticada)
     - Rota para deletar uma credencial específica do usuário pelo id
     - headers: { "Authorization": "Bearer $token" }
@@ -124,6 +127,8 @@ POST /cards (autenticada)
           "password": "lalalalal"
     }
 ```
+
+```yml
 GET /cards/:id (autenticada)
     - Rota para listar uma informação de cartão pelo id
     - headers: { "Authorization": "Bearer $token" }
@@ -137,11 +142,13 @@ GET /cards (autenticada)
     - body: {}
 ``` 
 
+```yml
 DELETE /cards/:id (autenticada)
     - Rota para deletar um cartão do usuário pelo id
     - headers: { "Authorization": "Bearer $token" }
     - body: {}
 ``` 
+
 ```yml
 POST /wifi (autenticada)
     - Rota para inserir nova informações de rede wifi do usuário
@@ -152,6 +159,8 @@ POST /wifi (autenticada)
          "password":"lalala"
     }
 ```
+
+```yml
 GET /wifi/:id (autenticada)
     - Rota para listar uma informação de wifi pelo id
     - headers: { "Authorization": "Bearer $token" }
@@ -164,7 +173,7 @@ GET /wifi (autenticada)
     - headers: { "Authorization": "Bearer $token" }
     - body: {}
 ``` 
-
+```yml
 DELETE /wifi/:id (autenticada)
     - Rota para deletar um wifi do usuário pelo id
     - headers: { "Authorization": "Bearer $token" }
