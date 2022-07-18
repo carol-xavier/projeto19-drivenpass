@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import wifiService, {CreateWiFiData} from "../services/wifiService.js";
-import { createWifiObject } from "../middlewares/wifiMiddleware.js"; 
+import { createWifiObject, getWiFiObjects } from "../middlewares/wifiMiddleware.js"; 
 import { decryptString } from "../utils/cryptrUtil.js";
 
 export async function createWiFi(req: Request, res: Response) {
@@ -16,8 +16,8 @@ export async function createWiFi(req: Request, res: Response) {
 
 export async function getAllWiFi(req:Request, res:Response) {
     const data = await wifiService.findAll();
-    // const credentials = getCrdObject(data);
-    res.status(302).send(data);
+    const wifi = getWiFiObjects(data);
+    res.status(302).send(wifi);
 };
 
 export async function getWiFi(req:Request, res:Response) {

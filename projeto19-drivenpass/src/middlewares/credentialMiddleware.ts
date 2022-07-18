@@ -16,4 +16,4 @@ export function getCrdObject(data) {
     });
 
     return credentials;
-}
+};

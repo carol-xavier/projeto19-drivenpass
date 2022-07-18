@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import cardService, { CreateCardData } from "../services/cardService.js";
-import { createCardObject } from "../middlewares/cardMiddleware.js";
+import { createCardObject, getCardObject } from "../middlewares/cardMiddleware.js";
 import { decryptString } from "../utils/cryptrUtil.js";
 
 export async function createCard(req: Request, res: Response) {
@@ -16,8 +16,8 @@ export async function createCard(req: Request, res: Response) {
 
 export async function getAllCards(req: Request, res: Response) {
     const data = await cardService.findAll();
-    // const credentials = getCrdObject(data);
-    res.status(302).send(data);
+    const cards = getCardObject(data);
+    res.status(302).send(cards);
 };
 
 export async function getCard(req: Request, res: Response) {

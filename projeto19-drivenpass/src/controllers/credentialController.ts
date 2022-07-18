@@ -16,8 +16,8 @@ export async function createCredential(req: Request, res: Response) {
 
 export async function getAllCredentials(req:Request, res:Response) {
     const data = await credentialService.findAll();
-    // const credentials = getCrdObject(data);
-    res.status(302).send(data);
+    const credentials = getCrdObject(data);
+    res.status(302).send(credentials);
 };
 
 export async function getCredential(req:Request, res:Response) {
